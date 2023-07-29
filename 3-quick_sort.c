@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "sort.h"
 
+/* Function prototype for quick_s */
+void quick_s(int *arr, int low, int high, size_t sz);
+
 /**
  * quick_sort - sorts in ascending order using the quick sort algorithm             
  * @array: Pointer to the array to be sorted
@@ -56,14 +59,22 @@ int partition(int *arr, int low, int high, size_t sz)
 	return (i + 1);
 }
 
-void quick_sort_recursive(int *arr, int low, int high, size_t sz)
+/**
+ * quick_s - quick sort
+ * @arr: Pointer to the array
+ * @low: Lower index
+ * @high: Higher index
+ * @sz: Size of the array
+ * Return: void
+ */
+void quick_s(int *arr, int low, int high, size_t sz)
 {
 	int pivot;
 
-	while (low < high)
+	if (low < high)
 	{
 		pivot = partition(arr, low, high, sz);
-		quick_sort_recursive(arr, low, pivot - 1, sz);
-		low = pivot + 1;
+		quick_s(arr, low, pivot - 1, sz);
+		quick_s(arr, pivot + 1, high, sz);
 	}
 }
